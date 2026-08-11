@@ -1,0 +1,16 @@
+{
+  "name": "mffa-map",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive donation-origin map for Moving Forward For Ataxia",
+  "type": "module",
+  "scripts": {
+    "build:geo": "node tools/build-geo.mjs",
+    "serve": "python3 -m http.server 8080"
+  },
+  "devDependencies": {
+    "topojson-client": "^3.1.0",
+    "us-atlas": "^3.0.1",
+    "world-atlas": "^2.0.2"
+  }
+}
