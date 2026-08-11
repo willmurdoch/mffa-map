@@ -410,12 +410,12 @@ footer a { color: var(--ink-2); }
         </svg>
         <span id="donateLabel">Donate with PayPal</span>
       </a>
-      <button class="btn" id="tour" type="button">
+      <button class="btn" id="seeMap" type="button">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="2" stroke-linecap="round" aria-hidden="true">
-          <path d="M5 12h14M13 6l6 6-6 6"/>
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 4 3 6.5v13L9 17l6 2.5 6-2.5v-13L15 6.5 9 4v13"/>
         </svg>
-        Take the tour
+        See the map
       </button>
     </div>
   </header>
@@ -1183,22 +1183,15 @@ if (!reduceMotion) {
   requestAnimationFrame(tick);
 }
 
-/* --- "take the tour": walk the roll call one city at a time ---------------- */
+/* --- jump to the map ------------------------------------------------------- */
 
-{
-  let tourTimer = null, tourIdx = 0;
-  $('#tour').addEventListener('click', () => {
-    if (tourTimer) { clearInterval(tourTimer); tourTimer = null; resetView(); return; }
-    document.querySelector('.board').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'center' });
-    tourIdx = 0;
-    const hop = () => {
-      if (tourIdx >= DONORS.length) { clearInterval(tourTimer); tourTimer = null; resetView(); return; }
-      flyTo(DONORS[tourIdx++]);
-    };
-    hop();
-    tourTimer = setInterval(hop, 2000);
+// The map never moves on its own. It only ever re-centres in response to a
+// direct action: a click in the roll call, a zoom button, or a drag.
+$('#seeMap').addEventListener('click', () => {
+  document.querySelector('.board').scrollIntoView({
+    behavior: reduceMotion ? 'auto' : 'smooth', block: 'center',
   });
-}
+});
 
 /* --- starfield ------------------------------------------------------------- */
 
